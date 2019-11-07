@@ -1,7 +1,7 @@
 import java.util.Scanner;
-import java.lang.Math;
 
-public class Lambdas {
+public class Lambdas
+{
     interface Calculation
     {
         public boolean calculation(int value);
@@ -21,51 +21,51 @@ public class Lambdas {
 
     public static void main(String[] args)
     {
-        Calculation calc = (int value) ->
+        Calculation calc1 = (int value) ->
         {
-                    if (!isFibonacci(value))
-                    {
-                        System.out.println("проверка на !Фибоначчи");
-                        return true;
-                    }
-            else{System.out.println("проверка на !Фибоначчи");
-                return false;}
-
-        };
-
-        Calculation calc1 = value ->
-        {
-        if (value % 15 ==0)
-        {
-            System.out.println("проверка деления на 15");
-            return true;
-        }
-
-        else
+            if (value % 15 == 0)
             {
-                System.out.println("проверка деления на 15");
-                return false;}
-        };
-
-        Calculation calc2 = value -> {
-            if (value >=0)
-            {
-                System.out.println("проверка на а > 0");
                 return true;
             }
-            else{System.out.println("проверка на а > 0");
-                return false;}
+            return false;
         };
 
-        Scanner scan = new Scanner(System.in);
+        Calculation calc2 = (int value) ->
+        {
+            if (value >= 0)
+            {
+                return true;
+            }
+            return false;
+        };
+
+        Calculation calc3 = (int value) ->
+        {
+            if (!isFibonacci(value))
+            {
+                return true;
+            }
+            return false;
+        };
+
+        Scanner scanner = new Scanner(System.in);
         while (true)
         {
-            int value = scan.nextInt();
-            System.out.println(calc.calculation(value));
-            System.out.println(calc1.calculation(value));
-            System.out.println(calc2.calculation(value));
+            if (scanner.hasNextInt())
+            {
+                int value = scanner.nextInt();
+                System.out.println("value % 15 == 0 -> " + calc1.calculation(value));
+                System.out.println("value > 0 -> " + calc2.calculation(value));
+                System.out.println("value is not Fibonacci -> " + calc3.calculation(value));
+            }
+            else if (scanner.hasNext("exit"))
+            {
+                return;
+            }
+            else
+            {
+                scanner.nextLine();
+            }
         }
-
     }
 }
-
